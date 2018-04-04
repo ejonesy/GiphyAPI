@@ -4,7 +4,7 @@ var topics = ["sad", "angry", "happy", "are you kidding me", "excited", "smitten
 //A for loop that goes through the topics array and creates a button for each one
 for (var i = 0; i < topics.length; i++) {
   $("#feels").append("<button>" + topics[i] + "</button>");
-
+  $("button").attr("data-emotion", topics[i]);
   console.log("Button: ", topics[i]);
 }
 
@@ -13,7 +13,7 @@ $("button").on("click", function() {
   var emotion = $(this).attr("data-emotion");
   var apiKey = "&api_key=slXBZitSryxgHeINyd8U7B6XDfGp7p24&limit=10";
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + emotion + apiKey;
-
+  
   $.ajax({
       url: queryURL,
       method: "GET"
@@ -21,8 +21,6 @@ $("button").on("click", function() {
   .then(function(response) {
 
     console.log("Img: ", response);
-
-    $("<button>").attr("data-emotion", topics[i]);
     var results = response.data;
     console.log(results);
     for (var i = 0; i < results.length; i++) {
