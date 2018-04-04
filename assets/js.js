@@ -1,12 +1,19 @@
 
 var topics = ["sad", "angry", "happy", "are you kidding me", "excited", "smitten", "rude", "offended"];
 
-//A for loop that goes through the topics array and creates a button for each one
-for (var i = 0; i < topics.length; i++) {
-  $("#feels").append("<button>" + topics[i] + "</button>");
-  $("button").attr("data-emotion", topics[i]);
-  console.log("Button: ", topics[i]);
-}
+function displayFeels() {
+
+  $("#feels").empty();
+  //A for loop that goes through the topics array and creates a button for each one
+  for (var i = 0; i < topics.length; i++) {
+    var feelsBadMan = $("<button>");
+    feelsBadMan.attr("data-emotion", topics[i]);
+    feelsBadMan.text(topics[i]);
+    $("#feels").append(feelsBadMan);
+    /*$("#feels").append("<button>" + topics[i] + "</button>");
+    $("button").attr("data-emotion", topics[i]);
+    console.log("Button: ", topics[i]);*/
+  };
 
 //A click event that uses an ajax call to grab ten static gif images per button click and load them on the page
 $("button").on("click", function() {
@@ -31,6 +38,7 @@ $("button").on("click", function() {
       var rating = results[i].rating;
       var p = $("<p>").text("Rating: " + rating);
 
+      
       var imageURL = $("<img>");
       imageURL.attr("src", results[i].images.fixed_height.url);
 
@@ -54,8 +62,10 @@ $("button").on("click", function() {
       });*/
     
     };
+  });
 });
-})
+};
+displayFeels()
 
 
 //When each image is clicked, the gif animates
